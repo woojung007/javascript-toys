@@ -15,7 +15,6 @@ const deleteToDo = (event) => {
   li.remove();
   toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
   saveTodDs();
-  console.log("newTodo", toDos);
 };
 
 const paintToDo = (newTodo) => {
@@ -41,7 +40,6 @@ const onClickToDoSubmit = (event) => {
     id: Date.now(),
   };
   toDos.push(newTodoObj);
-  console.log("newTodo", toDos);
   paintToDo(newTodoObj);
   saveTodDs();
 };
