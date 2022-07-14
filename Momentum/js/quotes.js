@@ -41,12 +41,8 @@ const quotes = [
   },
 ];
 
-console.log(quotes);
-
 const quote = document.querySelector("#quote span:first-child");
 const author = document.querySelector("#quote span:last-child");
-
-console.dir(quote, author);
 
 // Quote 무작위하게 나오게 하기
 const todayQuote = quotes[Math.floor(Math.random() * quotes.length)];
