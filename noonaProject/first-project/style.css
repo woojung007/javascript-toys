@@ -1,0 +1,54 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.container{
+    border: 10px solid pink;
+    border-radius: 20px;
+    text-align: center;
+    background-color: rgba(247, 243, 242, 0.7);
+    width: 80vw;
+    height: 40vw;
+}
+
+
+.button-style{
+    height: 80px;
+    width: 100px;
+    margin-top: 5px;
+    border-radius: 50px;
+    font-size: 20pt;
+    font-weight: bold;
+}
+
+@media screen and (max-width : 48rem){
+    .pre-title{
+        font-size: 10vw;;
+    }
+
+    .title{
+        font-size: 12vw;
+    }
+
+    .sub-title {
+        font-size: 11vw;
+    }
+
+    .form-control {
+        font-size: 8vw;
+        max-width: 500px;
+        margin-right:  0px ;
+    }
+
+    .button-reset {
+        font-size:  5vw;;
+        width: 80px;
+        height: 60px;
+    }
+
+}
