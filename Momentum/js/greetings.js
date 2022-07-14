@@ -30,7 +30,6 @@ const onLoginSubmit = (event) => {
 };
 
 const savedUsername = localStorage.getItem(USERNAME_KEY);
-console.log("savedUsername", savedUsername);
 
 if (!savedUsername) {
   // show the form

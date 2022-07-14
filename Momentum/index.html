@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Momentum</title>
   </head>
   <body>
+    <h2 id="clock">00 : 00</h2>
+
     <!-- input의 유효성 검사를 작동시키기 위해서는 input이 form 안에 있어야 함-->
     <!-- 엔터를 누르거나 버튼을 누르면 form이 submit 되어 웹사이트가 전체 새로고침 됨 -->
     <form id="login-form" class="hidden">
@@ -18,10 +20,10 @@
         placeholder="What is your name?"
       />
       <button>Log In</button>
-      <!-- <a href="https://naver.com">Go to courses</a> -->
     </form>
+
     <h1 id="greeting" class="hidden"></h1>
-    <script src="greetings.js"></script>
-    <script src="clock.js"></script>
+    <script src="js/greetings.js"></script>
+    <script src="js/clock.js"></script>
   </body>
 </html>
