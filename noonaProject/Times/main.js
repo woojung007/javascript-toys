@@ -14,7 +14,7 @@ let url;
 const getNews = async () => {
   try {
     let header = new Headers({
-      "x-api-key": "OCGURTJexzhBkuuH6N36VuO02PNv0QviYGwsW51isgM",
+      "x-api-key": "e8_o-TggIM_xyTJYV2Gzc0BfuBmeS1a4wmDU83bgYO0",
     });
     url.searchParams.set("page", page); // &page
     console.log("url?", url);
