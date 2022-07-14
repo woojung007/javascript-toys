@@ -38,10 +38,10 @@ function play() {
   if (history.includes(userValue)) {
     resultArea.textContent =
       "이미 입력한 숫자입니다. 다른 숫자를 입력해주세요.";
+    alert("이미 입력한 숫자입니다. 다른 숫자를 입력해주세요.");
     return;
   }
 
-  console.log(chances);
   chances--;
   chanceArea.textContent = `남은 기회 : ${chances}번`;
 
@@ -52,17 +52,20 @@ function play() {
   } else {
     resultArea.textContent = "맞추셨습니다!!!";
     gameOver = true;
+    alert("정답입니다!!!");
   }
 
   history.push(userValue);
   console.log(history);
 
-  if (chances < 1) {
+  if (chances < 1 || history.length > 5) {
     gameOver = true;
+    playButton.disabled = true;
   }
+  // if (history.length > 5) gameOver;
 
   if (gameOver == true) {
-    playButton.disabled = true;
+    chanceArea.textContent = `남은 기회 : ${chances}번`;
   }
 }
 
