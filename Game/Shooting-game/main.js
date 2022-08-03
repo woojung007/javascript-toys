@@ -16,14 +16,14 @@ let spaceshipSize = 60;
 let spaceshipX = canvas.width / 2 - spaceshipSize / 2;
 let spaceshipY = canvas.height - spaceshipSize;
 
+let bulletArr = [];
+
 let bulletSize = 15;
 let bulletX = spaceshipX + bulletSize + 1;
 let bulletY = canvas.height - spaceshipSize;
 
-let enemyX = Math.floor(Math.random() * 1000);
-let enemyY = 10;
-
-let spacePressed = [];
+let enemyArr = [];
+let enemyY = 20;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -36,13 +36,7 @@ function keyDownHandler(e) {
   }
 
   if (e.keyCode === 32 || e.code === "Space") {
-    spacePressed.push([
-      bulletImage,
-      spaceshipX + bulletSize + 1,
-      bulletY,
-      25,
-      25,
-    ]);
+    bulletArr.push([bulletImage, spaceshipX + bulletSize + 1, bulletY]);
   }
 }
 
@@ -65,7 +59,7 @@ function loadImage() {
   bulletImage.src = "/Game/Shooting-game/images/bullet.png";
 
   enemyImage = new Image();
-  enemyImage.src = "/Game/Shooting-game/images/monster.png";
+  enemyImage.src = "/Game/Shooting-game/images/enemy.png";
 
   gameOverImage = new Image();
   gameOverImage.src = "/Game/Shooting-game/images/gameover.png";
@@ -74,7 +68,6 @@ function loadImage() {
 function render() {
   ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
-  ctx.beginPath();
   ctx.drawImage(spaceShipImage, spaceshipX, spaceshipY);
 
   if (rightPressed && spaceshipX < canvas.width - spaceshipSize) {
@@ -84,28 +77,16 @@ function render() {
   }
 
   //   ctx.drawImage(bulletImage, bulletX, (bulletY -= 3), 25, 25);
-  for (let i = 0; i < spacePressed.length; i++) {
-    ctx.drawImage(
-      spacePressed[i][0],
-      spacePressed[i][1],
-      (spacePressed[i][2] -= 3),
-      25,
-      25
-    );
+  for (let i = 0; i < bulletArr.length; i++) {
+    ctx.drawImage(bulletImage, bulletArr[i][1], (bulletArr[i][2] -= 3), 25, 25);
   }
-  let result = [];
-  let enemy = [enemyImage, enemyX, (enemyY += 5), 40, 40];
-  for (let i = 0; i < 100; i++) {
-    result.push(enemy);
-    ctx.drawImage(
-      result[i][0],
-      Math.floor(Math.random() * 1000),
-      result[i][2],
-      40,
-      40
-    );
+
+  let enemy = [Math.floor(Math.random() * 50000), enemyY];
+  enemyArr.push(enemy);
+
+  for (let i = 0; i <= enemyArr.length; i++) {
+    ctx.drawImage(enemyImage, enemyArr[i][0], (enemyArr[i][1] += 0.5), 50, 50);
   }
-  console.log(result);
 }
 
 setInterval(render, 10);
