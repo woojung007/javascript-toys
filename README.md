@@ -9,7 +9,16 @@ https://user-images.githubusercontent.com/99471927/183595110-11850502-3ba4-4a64-
 - 적군을 하나씩 물리칠 때마다 스코어가 1점씩 올라가며 적군이 바닥에 닿게되면 게임은 종료된다.
 
 ### 구현방법
-- `Canvas API`를 사용하여 2D 그래픽을 조작
+- `Canvas API`를 사용하여 2D 그래픽을 조작하였다.
+- 메인으로 실행되는 함수를 하나 만들어주고 전체적인 그림을 그려주는 `render 함수`를 실행해준다. 
+- `main 함수` 안에서 `requestAnimationFrame()` 메서드를 사용해서 `main 함수`를 재귀적으로 불러주어 게임 애니메이션을 실행하였다. (setInterval보다 부드럽게 실행 가능)
+
+```javascript
+function main() {
+  render();
+  requestAnimationFrame(main);
+}
+```
 
 #### 우주선 조작하기
 - `leftPressed`와 `rightPressed`를 `boolean(false)`값으로 초기 설정을 해준다.
@@ -17,8 +26,9 @@ https://user-images.githubusercontent.com/99471927/183595110-11850502-3ba4-4a64-
 - leftPressed와 rightPressed 값이 true일 때마다 우주선의 좌표값을 3씩 더해주거나 빼준다.
 
 #### 총알 발사하기
-- 총알을 담아줄 `빈 배열(bulletArr)`를 하나 만들어준 뒤 스페이스바를 누를때마다 `총알 image를 Canvas에서 draw하기 위해서 필요한 arguments`를 push 해준다.
+- 총알을 담아줄 `빈 배열(bulletArr)`를 하나 만들어준 뒤 스페이스바를 누를때마다 `총알 image를 Canvas에서 draw하기 위해서 필요한 총알의 X좌표와 Y좌표`를 push 해준다.
 - 실제로 render 할 때 반복문을 돌려서 이 `bulletArr`의 값들을 차례대로 가져와 그림을 그려준다.
+- 이때 Y좌표는 점점 좌표가 줄어들도록 설정해준다. 
 
 #### 적군 랜덤으로 만들기
 - 총알을 만들었던 것처럼 `빈 배열(enemyArr)`을 하나 만들어주고 실제 render 할 때 enemyArr의 값을 차례대로 가져와서 그림을 그려준다.
