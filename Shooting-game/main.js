@@ -83,6 +83,7 @@ function render() {
 
   let enemy = [Math.floor(Math.random() * 50000), enemyY];
   enemyArr.push(enemy);
+  // console.log(enemyArr);
 
   for (let i = 0; i <= enemyArr.length; i++) {
     ctx.drawImage(enemyImage, enemyArr[i][0], (enemyArr[i][1] += 0.5), 50, 50);
