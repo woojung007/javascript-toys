@@ -14,7 +14,7 @@ https://user-images.githubusercontent.com/99471927/183595110-11850502-3ba4-4a64-
 #### 우주선 조작하기
 - `leftPressed`와 `rightPressed`를 `boolean(false)`값으로 초기 설정을 해준다.
 - 왼쪽이나 오른쪽 키보드가 눌리면(`keyDown`) true를 주고 키보드가 다시 올라가면(`keyUp`) false값을 주도록 설정해준다.
-- leftPressed와 rightPressed 값이 true일 때마다 우주선의 좌표값을 2씩 더해주거나 빼준다.
+- leftPressed와 rightPressed 값이 true일 때마다 우주선의 좌표값을 3씩 더해주거나 빼준다.
 
 #### 총알 발사하기
 - 총알을 담아줄 `빈 배열(bulletArr)`를 하나 만들어준 뒤 스페이스바를 누를때마다 `총알 image를 Canvas에서 draw하기 위해서 필요한 arguments`를 push 해준다.
