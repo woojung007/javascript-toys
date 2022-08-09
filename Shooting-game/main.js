@@ -115,12 +115,10 @@ function render() {
   }
 }
 
-setInterval(render, 10);
-
-// function main() {
-//   render();
-//   requestAnimationFrame(main);
-// }
+function main() {
+  render();
+  requestAnimationFrame(main);
+}
 
 loadImage();
-// main();
+main();
