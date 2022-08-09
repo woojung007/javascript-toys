@@ -26,12 +26,12 @@ function main() {
 - leftPressed와 rightPressed 값이 true일 때마다 우주선의 좌표값을 3씩 더해주거나 빼준다.
 
 #### 총알 발사하기
-- 총알을 담아줄 `빈 배열(bulletArr)`를 하나 만들어준 뒤 스페이스바를 누를때마다 `총알 image를 Canvas에서 draw하기 위해서 필요한 총알의 X좌표와 Y좌표`를 push 해준다.
+- 총알을 담아줄 `빈 배열(bulletArr)`를 하나 만들어준 뒤 스페이스바를 누를때마다 총알 image를 Canvas에서 draw하기 위해서 필요한 `총알의 X좌표`와 `Y좌표`를 push 해준다.
 - 실제로 render 할 때 반복문을 돌려서 이 `bulletArr`의 값들을 차례대로 가져와 그림을 그려준다.
-- 이때 Y좌표는 점점 좌표가 줄어들도록 설정해준다. 
+- 이때 총알의 Y좌표는 점점 위로 가야하기 때문에 좌표값이 서서히 줄어들도록 설정해주었다. (bulletArr[ i ][ 1 ] -= 3)
 
 #### 적군 랜덤으로 만들기
-- 총알을 만들었던 것처럼 `빈 배열(enemyArr)`을 하나 만들어주고 실제 render 할 때 enemyArr의 값을 차례대로 가져와서 그림을 그려준다.
+- 총알을 만들었던 것처럼 `빈 배열(enemyArr)`을 하나 만들어주고 실제 render 할 때 필요한 enemy의 enemyArr의 값을 차례대로 가져와서 그림을 그려준다.
 - 이때 enemy의 X 좌표는 `Math.random`과 `Math.floor`을 사용해서 랜덤으로 나오도록 설정해준다. 
 
 ### 적군이 총알을 맞았을 때 스코어 올리기
