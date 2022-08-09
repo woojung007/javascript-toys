@@ -2,11 +2,7 @@
 
 ## 1. Shooting Game - Javascript로 슈팅게임 만들기
 ## In progress ..
-
-
 https://user-images.githubusercontent.com/99471927/183595110-11850502-3ba4-4a64-938b-09bda06e0f30.mov
-
-
 
 ### 게임 기본 설명
 - 우주선을 좌우로 조작하여 총알을 쏴 하늘에서 떨어지는 적군을 물리치는 게임
