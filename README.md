@@ -23,12 +23,20 @@ function main() {
 #### 우주선 조작하기
 - `leftPressed`와 `rightPressed`를 `boolean(false)`값으로 초기 설정을 해준다.
 - 왼쪽이나 오른쪽 키보드가 눌리면(`keyDown`) true를 주고 키보드가 다시 올라가면(`keyUp`) false값을 주도록 설정해준다.
-- leftPressed와 rightPressed 값이 true일 때마다 우주선의 좌표값을 3씩 더해주거나 빼준다.
+- `leftPressed`와 `rightPressed` 값이 true일 때마다 우주선의 좌표값을 3씩 더해주거나 빼준다.
+- 이때 우주선이 화면 밖으로 넘어가면 안되기 때문에 `우주선의 X좌표값의 조건`을 다음과 같이 주었다.
+```javascript
+  if (rightPressed && spaceshipX < canvas.width - spaceshipSize) {
+    spaceshipX += 3;
+  } else if (leftPressed && spaceshipX > 0) {
+    spaceshipX -= 3;
+  }
+```
 
 #### 총알 발사하기
 - 총알을 담아줄 `빈 배열(bulletArr)`를 하나 만들어준 뒤 스페이스바를 누를때마다 총알 image를 Canvas에서 draw하기 위해서 필요한 `총알의 X좌표`와 `Y좌표`를 push 해준다.
 - 실제로 render 할 때 반복문을 돌려서 이 `bulletArr`의 값들을 차례대로 가져와 그림을 그려준다.
-- 이때 총알의 Y좌표는 점점 위로 가야하기 때문에 좌표값이 서서히 줄어들도록 설정해주었다. (bulletArr[ i ][ 1 ] -= 3)
+- 이때 총알의 Y좌표는 점점 위로 가야하기 때문에 좌표값이 서서히 줄어들도록 설정해주었다. `bulletArr[ i ][ 1 ] -= 3`
 
 #### 적군 랜덤으로 만들기
 - 총알을 만들었던 것처럼 `빈 배열(enemyArr)`을 하나 만들어주고 실제 render 할 때 필요한 enemy의 enemyArr의 값을 차례대로 가져와서 그림을 그려준다.
