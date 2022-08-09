@@ -7,7 +7,12 @@ canvas.width = 400;
 canvas.height = 700;
 document.body.appendChild(canvas);
 
-let backgroundImage, spaceShipImage, bulletImage, enemyImage, gameOverImage;
+let backgroundImage,
+  spaceShipImage,
+  bulletImage,
+  enemyImage,
+  fireImage,
+  gameOverImage;
 
 let rightPressed,
   leftPressed = false;
@@ -17,13 +22,15 @@ let spaceshipX = canvas.width / 2 - spaceshipSize / 2;
 let spaceshipY = canvas.height - spaceshipSize;
 
 let bulletArr = [];
-
-let bulletSize = 15;
-let bulletX = spaceshipX + bulletSize + 1;
+let bulletSize = 25;
+let bulletX;
 let bulletY = canvas.height - spaceshipSize;
 
 let enemyArr = [];
-let enemyY = 20;
+let enemySize = 50;
+let enemy;
+let enemyX = spaceshipX + bulletSize - 8;
+let enemyY = 0;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -36,7 +43,11 @@ function keyDownHandler(e) {
   }
 
   if (e.keyCode === 32 || e.code === "Space") {
-    bulletArr.push([bulletImage, spaceshipX + bulletSize + 1, bulletY]);
+    bulletArr.push([spaceshipX + bulletSize - 8, bulletY]);
+  }
+
+  for (let i = 0; i < bulletArr.length; i++) {
+    bulletX = bulletArr[i][0];
   }
 }
 
@@ -61,41 +72,55 @@ function loadImage() {
   enemyImage = new Image();
   enemyImage.src = "/Shooting-game/images/enemy.png";
 
+  fireImage = new Image();
+  fireImage.src = "/Shooting-game/images/fire.png";
+
   gameOverImage = new Image();
   gameOverImage.src = "/Shooting-game/images/gameover.png";
 }
 
 function render() {
   ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-
   ctx.drawImage(spaceShipImage, spaceshipX, spaceshipY);
 
   if (rightPressed && spaceshipX < canvas.width - spaceshipSize) {
-    spaceshipX += 2;
+    spaceshipX += 3;
   } else if (leftPressed && spaceshipX > 0) {
-    spaceshipX -= 2;
+    spaceshipX -= 3;
   }
 
-  //   ctx.drawImage(bulletImage, bulletX, (bulletY -= 3), 25, 25);
   for (let i = 0; i < bulletArr.length; i++) {
-    ctx.drawImage(bulletImage, bulletArr[i][1], (bulletArr[i][2] -= 3), 25, 25);
+    ctx.drawImage(bulletImage, bulletArr[i][0], (bulletArr[i][1] -= 3), 25, 25);
   }
 
-  let enemy = [Math.floor(Math.random() * 50000), enemyY];
-  enemyArr.push(enemy);
-  // console.log(enemyArr);
+  enemy = [Math.floor(Math.random() * 30000), enemyY];
+  enemyX = enemy[0];
 
-  for (let i = 0; i <= enemyArr.length; i++) {
+  if (enemy[0] < canvas.width - enemySize) {
+    enemyArr.push(enemy);
+  }
+
+  for (let i = 0; i < enemyArr.length; i++) {
     ctx.drawImage(enemyImage, enemyArr[i][0], (enemyArr[i][1] += 0.5), 50, 50);
+  }
+
+  console.log(bulletX, bulletY, enemyX, enemyY);
+
+  if (
+    bulletX === enemyX ||
+    bulletX === enemyX + 10 ||
+    bulletX === enemyX - 10
+  ) {
+    ctx.drawImage(fireImage, enemyX, enemyY, 48, 48);
   }
 }
 
 setInterval(render, 10);
 
-function main() {
-  render();
-  requestAnimationFrame(main);
-}
+// function main() {
+//   render();
+//   requestAnimationFrame(main);
+// }
 
 loadImage();
-main();
+// main();
