@@ -50,19 +50,19 @@ function keyUpHandler(e) {
 
 function loadImage() {
   backgroundImage = new Image();
-  backgroundImage.src = "/Game/Shooting-game/images/background.gif";
+  backgroundImage.src = "/Shooting-game/images/background.gif";
 
   spaceShipImage = new Image();
-  spaceShipImage.src = "/Game/Shooting-game/images/spaceship.png";
+  spaceShipImage.src = "/Shooting-game/images/spaceship.png";
 
   bulletImage = new Image();
-  bulletImage.src = "/Game/Shooting-game/images/bullet.png";
+  bulletImage.src = "/Shooting-game/images/bullet.png";
 
   enemyImage = new Image();
-  enemyImage.src = "/Game/Shooting-game/images/enemy.png";
+  enemyImage.src = "/Shooting-game/images/enemy.png";
 
   gameOverImage = new Image();
-  gameOverImage.src = "/Game/Shooting-game/images/gameover.png";
+  gameOverImage.src = "/Shooting-game/images/gameover.png";
 }
 
 function render() {
