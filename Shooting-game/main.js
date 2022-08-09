@@ -23,13 +23,13 @@ let spaceshipY = canvas.height - spaceshipSize;
 
 let bulletArr = [];
 let bulletSize = 25;
-let bulletX;
+let bulletX = spaceshipX + bulletSize - 8;
 let bulletY = canvas.height - spaceshipSize;
 
 let enemyArr = [];
 let enemySize = 50;
 let enemy;
-let enemyX = spaceshipX + bulletSize - 8;
+let enemyX;
 let enemyY = 0;
 
 document.addEventListener("keydown", keyDownHandler, false);
