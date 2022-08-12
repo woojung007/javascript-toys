@@ -6,6 +6,9 @@ ctx = canvas.getContext("2d");
 canvas.width = 400;
 canvas.height = 700;
 document.body.appendChild(canvas);
+let animation;
+
+// ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 let backgroundImage,
   spaceShipImage,
@@ -30,7 +33,9 @@ let enemyArr = [];
 let enemySize = 50;
 let enemy;
 let enemyX;
-let enemyY = 0;
+let enemyY;
+
+let isCrushed = false;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -79,9 +84,40 @@ function loadImage() {
   gameOverImage.src = "/Shooting-game/images/gameover.png";
 }
 
+function collisionDetection() {
+  enemy = [Math.floor(Math.random() * 30000), 0];
+
+  if (enemy[0] < canvas.width - enemySize) {
+    enemyArr.push(enemy);
+  }
+
+  let yDiff = bulletY - (enemyY + enemySize);
+  let xDiff = enemyX - (bulletX + bulletSize);
+
+  for (let i = 0; i < enemyArr.length; i++) {
+    enemyX = enemyArr[i][0];
+    enemyY = enemyArr[i][1];
+
+    if (yDiff < 0 && xDiff < 0) {
+      console.log("collision");
+      ctx.drawImage(fireImage, enemyX, enemyY);
+    } else {
+      ctx.drawImage(
+        enemyImage,
+        enemyArr[i][0],
+        (enemyArr[i][1] += 0.5),
+        50,
+        50
+      );
+    }
+  }
+}
+
 function render() {
   ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
   ctx.drawImage(spaceShipImage, spaceshipX, spaceshipY);
+
+  collisionDetection();
 
   if (rightPressed && spaceshipX < canvas.width - spaceshipSize) {
     spaceshipX += 3;
@@ -91,33 +127,13 @@ function render() {
 
   for (let i = 0; i < bulletArr.length; i++) {
     ctx.drawImage(bulletImage, bulletArr[i][0], (bulletArr[i][1] -= 3), 25, 25);
-  }
-
-  enemy = [Math.floor(Math.random() * 30000), enemyY];
-  enemyX = enemy[0];
-
-  if (enemy[0] < canvas.width - enemySize) {
-    enemyArr.push(enemy);
-  }
-
-  for (let i = 0; i < enemyArr.length; i++) {
-    ctx.drawImage(enemyImage, enemyArr[i][0], (enemyArr[i][1] += 0.5), 50, 50);
-  }
-
-  console.log(bulletX, bulletY, enemyX, enemyY);
-
-  if (
-    bulletX === enemyX ||
-    bulletX === enemyX + 10 ||
-    bulletX === enemyX - 10
-  ) {
-    ctx.drawImage(fireImage, enemyX, enemyY, 48, 48);
+    bulletY = bulletArr[i][1];
   }
 }
 
 function main() {
   render();
-  requestAnimationFrame(main);
+  animation = requestAnimationFrame(main);
 }
 
 loadImage();
