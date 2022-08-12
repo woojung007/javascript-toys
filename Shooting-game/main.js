@@ -26,8 +26,8 @@ let spaceshipY = canvas.height - spaceshipSize;
 
 let bulletArr = [];
 let bulletSize = 25;
-let bulletX = spaceshipX + bulletSize - 8;
-let bulletY = canvas.height - spaceshipSize;
+let bulletX;
+let bulletY;
 
 let enemyArr = [];
 let enemySize = 50;
@@ -48,11 +48,10 @@ function keyDownHandler(e) {
   }
 
   if (e.keyCode === 32 || e.code === "Space") {
-    bulletArr.push([spaceshipX + bulletSize - 8, bulletY]);
-  }
-
-  for (let i = 0; i < bulletArr.length; i++) {
-    bulletX = bulletArr[i][0];
+    bulletArr.push([
+      spaceshipX + bulletSize - 8,
+      canvas.height - spaceshipSize,
+    ]);
   }
 }
 
@@ -100,7 +99,7 @@ function collisionDetection() {
 
     if (yDiff < 0 && xDiff < 0) {
       console.log("collision");
-      ctx.drawImage(fireImage, enemyX, enemyY);
+      ctx.drawImage(fireImage, enemyArr[i][0], (enemyArr[i][1] += 0.5));
     } else {
       ctx.drawImage(
         enemyImage,
@@ -117,8 +116,6 @@ function render() {
   ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
   ctx.drawImage(spaceShipImage, spaceshipX, spaceshipY);
 
-  collisionDetection();
-
   if (rightPressed && spaceshipX < canvas.width - spaceshipSize) {
     spaceshipX += 3;
   } else if (leftPressed && spaceshipX > 0) {
@@ -126,8 +123,19 @@ function render() {
   }
 
   for (let i = 0; i < bulletArr.length; i++) {
-    ctx.drawImage(bulletImage, bulletArr[i][0], (bulletArr[i][1] -= 3), 25, 25);
+    bulletX = bulletArr[i][0];
     bulletY = bulletArr[i][1];
+    ctx.drawImage(bulletImage, bulletArr[i][0], (bulletArr[i][1] -= 3), 25, 25);
+  }
+
+  collisionDetection();
+  gameOver();
+}
+
+function gameOver() {
+  if (enemyArr === canvas.height - enemySize) {
+    cancelAnimationFrame(animation);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 }
 
