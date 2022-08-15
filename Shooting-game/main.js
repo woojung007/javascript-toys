@@ -90,29 +90,29 @@ function collisionDetection() {
     enemyArr.push(enemy);
   }
 
-  let yDiff = bulletY - (enemyY + enemySize);
-  let xDiff = enemyX - (bulletX + bulletSize);
-
   for (let i = 0; i < enemyArr.length; i++) {
+    ctx.drawImage(enemyImage, enemyArr[i][0], (enemyArr[i][1] += 0.5), 50, 50);
+
     enemyX = enemyArr[i][0];
     enemyY = enemyArr[i][1];
 
-    if (yDiff < 0 && xDiff < 0) {
+    let yDiff = bulletY - (enemyY + enemySize);
+    let xDiff = bulletX - (enemyX + enemySize / 2);
+
+    if (yDiff < 0 && -10 < xDiff && xDiff < 0) {
       console.log("collision");
-      ctx.drawImage(fireImage, enemyArr[i][0], (enemyArr[i][1] += 0.5));
-    } else {
-      ctx.drawImage(
-        enemyImage,
-        enemyArr[i][0],
-        (enemyArr[i][1] += 0.5),
-        50,
-        50
-      );
+      // console.log("에너미 엑스좌표", enemyX, bulletX, enemyY, bulletY);
+      ctx.drawImage(fireImage, enemyX, enemyY);
     }
+  }
+
+  if (enemyY === canvas.height - enemySize) {
+    cancelAnimationFrame(animation);
   }
 }
 
 function render() {
+  console.log(enemyX, bulletX);
   ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
   ctx.drawImage(spaceShipImage, spaceshipX, spaceshipY);
 
