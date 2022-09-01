@@ -41,13 +41,13 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
 function keyDownHandler(e) {
-  if (e.key === 37 || e.key === "ArrowRight") {
+  if (e.keyCode === 39) {
     rightPressed = true;
-  } else if (e.key === 39 || e.key === "ArrowLeft") {
+  } else if (e.keyCode === 37) {
     leftPressed = true;
   }
 
-  if (e.keyCode === 32 || e.code === "Space") {
+  if (e.keyCode === 32) {
     bulletArr.push([
       spaceshipX + bulletSize - 8,
       canvas.height - spaceshipSize,
@@ -56,9 +56,9 @@ function keyDownHandler(e) {
 }
 
 function keyUpHandler(e) {
-  if (e.key === 37 || e.key === "ArrowRight") {
+  if (e.keyCode === 39) {
     rightPressed = false;
-  } else if (e.key === 39 || e.key === "ArrowLeft") {
+  } else if (e.keyCode === 37) {
     leftPressed = false;
   }
 }
@@ -99,10 +99,14 @@ function collisionDetection() {
     let yDiff = bulletY - (enemyY + enemySize);
     let xDiff = bulletX - (enemyX + enemySize / 2);
 
-    if (yDiff < 0 && -10 < xDiff && xDiff < 0) {
+    if (yDiff < 0 && -30 < xDiff && xDiff < 30) {
       console.log("collision");
       // console.log("에너미 엑스좌표", enemyX, bulletX, enemyY, bulletY);
       ctx.drawImage(fireImage, enemyX, enemyY);
+      setTimeout(function () {
+        enemyImage.src = "";
+        fireImage.src = "";
+      }, 1000);
     }
   }
 
@@ -112,7 +116,6 @@ function collisionDetection() {
 }
 
 function render() {
-  console.log(enemyX, bulletX);
   ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
   ctx.drawImage(spaceShipImage, spaceshipX, spaceshipY);
 
