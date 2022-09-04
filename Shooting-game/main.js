@@ -26,6 +26,7 @@ let spaceshipSize = 60;
 let spaceshipX = canvas.width / 2 - spaceshipSize / 2;
 let spaceshipY = canvas.height - spaceshipSize;
 
+// 총알 만들기
 let bulletArr = [];
 
 function Bullet() {
@@ -59,6 +60,9 @@ function createBullet() {
   b.init();
 }
 
+// 적군 만들기
+
+// 랜덤 함수
 function generateRandomValue(min, max) {
   let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
   return randomNum;
