@@ -1,11 +1,11 @@
 # Javascript-study
 
-## 1. Shooting Game - Javascript로 슈팅게임 만들기
-## In progress ..
-https://user-images.githubusercontent.com/99471927/183595110-11850502-3ba4-4a64-938b-09bda06e0f30.mov
+## 🚀 1. Shooting Game - Javascript로 슈팅게임 만들기
+
+https://user-images.githubusercontent.com/99471927/188315527-f80702e9-b21a-4b29-bc5d-4fa41f139e32.mov
 
 ### [1] 게임 기본 설명
-- 우주선을 좌우로 조작하여 총알을 쏴 하늘에서 떨어지는 적군을 물리치는 게임
+- 우주선을 좌우로 조작하여 총알을 쏴 하늘에서 떨어지는 적군을 물리친다.
 - 적군을 하나씩 물리칠 때마다 스코어가 1점씩 올라가며 적군이 바닥에 닿게되면 게임은 종료된다.
 
 ### [2] 구현방법
@@ -26,6 +26,7 @@ function main() {
 - 왼쪽이나 오른쪽 키보드가 눌리면(`keyDown`) true를 주고 키보드가 다시 올라가면(`keyUp`) false값을 주도록 설정해준다.
 - `leftPressed`와 `rightPressed` 값이 true일 때마다 우주선의 좌표값을 3씩 더해주거나 빼준다.
 - 이때 우주선이 화면 밖으로 넘어가면 안되기 때문에 `우주선의 X좌표값의 조건`을 다음과 같이 주었다.
+
 ```javascript
   if (rightPressed && spaceshipX < canvas.width - spaceshipSize) {
     spaceshipX += 3;
@@ -33,18 +34,63 @@ function main() {
     spaceshipX -= 3;
   }
 ```
+<br/>
 
 #### [2-3] 총알 발사하기
-- 총알을 담아줄 `빈 배열(bulletArr)`를 하나 만들어준 뒤 스페이스바를 누를때마다 총알 image를 Canvas에서 draw하기 위해서 필요한 `총알의 X 좌표`와 `Y 좌표`를 push 해준다.
-- 실제로 render 할 때 반복문을 돌려서 이 `bulletArr`의 값들을 차례대로 가져와 그림을 그려준다.
-- 이때 총알의 Y좌표는 점점 위로 가야하기 때문에 좌표값이 서서히 줄어들도록 설정해주었다. `bulletArr[ i ][ 1 ] -= 3`
+- 총알을 담아줄 `빈 배열(bulletArr)`를 하나 만들어준 뒤 `총알(Bullet)`에 관련된 내용들을 함수로 만들어준다. 
+- spacebar를 누를때마다 새로운 Bullet을 bulletArr에 push해서 `new Bullet`을 생성해준다.
+
+```js
+function Bullet() {
+  this.x = 0;
+  this.y = 0;
+  this.init = function () {
+    this.x = spaceshipX + 17;
+    this.y = spaceshipY;
+    this.alive = true;
+    bulletArr.push(this);
+  };
+ }
+```
+<br/>
+
 
 #### [2-4] 적군 랜덤으로 만들기
-- 총알을 만들었던 것처럼 `빈 배열(enemyArr)`을 하나 만들어주고 `enemy의 X 좌표`와 `Y 좌표`를 push 해준 뒤, 실제 render 할 때 각 좌표 값들을 차례대로 가져와서 그림을 그려준다.
-- 이때 enemy의 X 좌표는 캔버스를 넘어가지 않도록 조건을 주었고, `Math.random`과 `Math.floor`을 사용해서 enemy가 랜덤으로 나오도록 설정해주었다.
+
+- 적군을 랜덤으로 나오게 하기 위해서 최솟값과 최댓값 사이에서 랜덤한 수를 만드는 함수(generateRandomValue)를 하나 만들어준다. 
+이 함수는 매개변수로 최솟값과 최댓값을 받는데 이는 차레대로 캔버스의 시작과 끝을 의미한다.
+```js
+function generateRandomValue(min, max) {
+  let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+  return randomNum;
+}
+```
+- 총알(Bullet)과 마찬가지로 빈 배열과 Enemy 함수를 하나 만들어준다. 여기에서 적군(Enemy)의 x 값은 캔버스의 범위 안에서 움직여야 하므로 최솟값은 0이고 최댓값은 캔버스의 너비에서 직군의 크기를 뺀 값이라고 할 수 있다. 
+
+```js
+let enemyArr = [];
+
+function Enemy() {
+  this.x = 0;
+  this.y = 0;
+  this.size = 50;
+
+  this.init = function () {
+    this.x = generateRandomValue(0, canvas.width - 60);
+    this.y = 0;
+    enemyArr.push(this);
+  };
+  this.update = function () {
+    if (this.y >= canvas.height - 50) {
+      gameOver = true;
+    }
+  };
+}
+```
+
 
 #### [2-5] 적군이 총알을 맞았을 때 스코어 올리기
-- 진행중
+- 
 
 <br/><br/>
 ## 2. Momentum - 바닐라 JS로 크롬 앱 만들기
