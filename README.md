@@ -66,6 +66,8 @@ function generateRandomValue(min, max) {
 }
 ```
 - 총알(Bullet)과 마찬가지로 빈 배열과 Enemy 함수를 하나 만들어준다. 여기에서 적군(Enemy)의 x 값은 캔버스의 범위 안에서 움직여야 하므로 최솟값은 0이고 최댓값은 캔버스의 너비에서 직군의 크기를 뺀 값이라고 할 수 있다. 
+- 어떠한 적군이라도 바닥에 닿았을 때 게임이 끝나도록(gameOver = true;) 하기 위해서 업데이트(update) 항목을 추가해준다. 이후 모든 update 항목들만 하나의 함수로 묶어서 한번에 실행해줄 것이다. 
+- Enemy가 1초에 1개씩 생성되도록 setInterval을 사용해서 구현해준다. 
 
 ```js
 let enemyArr = [];
@@ -85,6 +87,13 @@ function Enemy() {
       gameOver = true;
     }
   };
+}
+
+function createEnemy() {
+  const interval = setInterval(function () {
+    let e = new Enemy();
+    e.init();
+  }, 1000);
 }
 ```
 
