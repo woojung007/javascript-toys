@@ -1,6 +1,7 @@
 # Javascript-study
 
 ## 🚀 Shooting Game - Javascript로 슈팅게임 만들기
+[Github](https://github.com/woojung007/Javascript-study/tree/master/Shooting-game)
 
 https://user-images.githubusercontent.com/99471927/188315527-f80702e9-b21a-4b29-bc5d-4fa41f139e32.mov
 
