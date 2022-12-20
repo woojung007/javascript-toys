@@ -1,5 +1,10 @@
 # Javascript-study
 
+## 배경
+- class형 함수 사용법을 알아보기 위해서 시작하게 되었다.
+- React가 아닌 Vanila JS로 변수가 변화하였을 때 화면에 반영되는 모습을 구현해보고 싶었다.
+
+
 ## 🚀 Shooting Game - Javascript로 슈팅게임 만들기
 [Github](https://github.com/woojung007/Javascript-study/tree/master/Shooting-game)
 
