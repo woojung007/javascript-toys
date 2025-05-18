@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Point Chart with Chart.js + date-fns</title>
+    <!-- 1) Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 2) date-fns (시간 처리 라이브러리) -->
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2"></script>
+    <!-- 3) Chart.js용 date-fns 어댑터 -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+  </head>
+  <body>
+    <canvas id="temperaturePointChart" width="800" height="400"></canvas>
+
+    <script>
+      fetch(
+        "https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.9780&hourly=temperature_2m"
+      )
+        .then((res) => res.json())
+        .then((api) => {
+          const times = api.hourly.time;
+          const temps = api.hourly.temperature_2m;
+          const dataPoints = times.map((t, i) => ({
+            x: new Date(t),
+            y: temps[i],
+          }));
+
+          const ctx = document
+            .getElementById("temperaturePointChart")
+            .getContext("2d");
+          new Chart(ctx, {
+            type: "scatter",
+            data: {
+              datasets: [
+                {
+                  label: "시간별 기온 (°C)",
+                  data: dataPoints,
+                  pointRadius: 4,
+                  showLine: false,
+                },
+              ],
+            },
+            options: {
+              scales: {
+                x: {
+                  type: "time", // time 축 사용
+                  time: { unit: "hour" }, // 시간 단위: 시간별
+                },
+                y: {
+                  title: { display: true, text: "기온 (°C)" },
+                },
+              },
+            },
+          });
+        })
+        .catch((err) => console.error("API 호출 중 오류 발생:", err));
+    </script>
+  </body>
+</html>
